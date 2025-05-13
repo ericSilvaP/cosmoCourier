@@ -1,5 +1,7 @@
+import { Cargo } from "./cargos"
+
 export class Planet {
-  constructor(
+  constructor (
     private distanceFromEarth: number, // em Unidade Astronômica (UA). Equivale a 149.597.870,7 km
     private atmosphereType: string,
     private composition: string,
@@ -20,5 +22,9 @@ export class Planet {
 
   distanceToKilometer(): number {
     return this.getDistanceFromEarth() * 149597870.7
+  }
+
+  checkCargoCompat(cargo: Cargo): boolean {
+    return this.cargosCompatibility.includes(cargo.getType())
   }
 }
