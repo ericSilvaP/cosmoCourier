@@ -3,7 +3,7 @@ export class Planet {
     private distanceFromEarth: number, // em Unidade Astronômica (UA). Equivale a 149.597.870,7 km
     private atmosphereType: string,
     private composition: string,
-    private cargosCompatibility: string[]
+    public readonly cargosCompatibility: string[]
   ) {}
 
   getDistanceFromEarth(): number {
@@ -16,10 +16,6 @@ export class Planet {
 
   getComposition(): string {
     return this.composition
-  }
-
-  getCargosCompatibility(): string[] {
-    return this.cargosCompatibility
   }
 
   distanceToKilometer(): number {
