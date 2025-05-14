@@ -14,9 +14,6 @@ const cargoTypes = Object.values(CargoType)
 const planetPrefixes = ['Gas', 'Tro', 'Finlo', 'Iperf', 'Adol', 'Sers']
 const planetSufixes = ['Atan', 'imer', 'tein', 'otga', 'ekir', 'svec']
 
-const spaceships: Spaceship[] = []
-const cargos: Cargo[] = []
-
 function generatePlanets(
   n: number,
   maxDistance: number,
@@ -27,12 +24,22 @@ function generatePlanets(
   sufixes: string[],
   infixes?: string[],
 ): Planet[] {
+  if (
+    [atmospheres, compositions, cargoTypes, prefixes, sufixes].some((arr) => arr.length === 0) ||
+    (infixes && infixes.length === 0)
+  ) {
+    throw new Error('Empty array.')
+  }
+
+  if (n < 0) throw Error('N must be positive.')
+  if (maxDistance < 0) throw Error('MaxDistance must be positive.')
+
   const planets: Planet[] = []
   for (let i = 0; i < n; i++) {
     // atributos da classe Planet
     const name = nameGenerator(prefixes, sufixes, infixes)
     const distanceFromEarth = randomFloat(1, maxDistance)
-    const artmosphereType = atmospheres[random(atmospheres.length)]
+    const atmosphereType = atmospheres[random(atmospheres.length)]
     const composition = compositions[random(compositions.length)]
     const cargosCompatibility: string[] = []
 
@@ -44,10 +51,45 @@ function generatePlanets(
       }
       cargosCompatibility.push(cargoCompatTemp)
     }
-    const planet: Planet = new Planet(name, distanceFromEarth, artmosphereType, composition, cargosCompatibility)
+    const planet: Planet = new Planet(name, distanceFromEarth, atmosphereType, composition, cargosCompatibility)
     planets.push(planet)
   }
   return planets
 }
 
-console.log(generatePlanets(10, 50, atmospheres, compositions, cargoTypes, planetPrefixes, planetSufixes))
+function generateCargos(
+  n: number,
+  maxWeight: number,
+  maxVolume: number,
+  cargoTypes: string[],
+  minWeight?: number,
+  minVolume?: number,
+): Cargo[] {
+  if (cargoTypes.length == 0) throw Error('Empty array.')
+  if (
+    n <= 0 ||
+    maxWeight <= 0 ||
+    maxVolume <= 0 ||
+    (minWeight !== undefined && minWeight <= 0) ||
+    (minVolume !== undefined && minVolume <= 0)
+  )
+    throw new Error('Numeric values must be positive.')
+
+  if ((minWeight !== undefined && maxWeight < minWeight) || (minVolume !== undefined && maxVolume < minVolume))
+    throw new Error('Maximum values must be greater than minimum values.')
+
+  if (!minVolume) minVolume = 1
+  if (!minWeight) minWeight = 1
+
+  const cargos: Cargo[] = []
+  for (let i = 0; i < n; i++) {
+    const weight = randomFloat(minWeight, maxWeight)
+    const volume = randomFloat(minVolume, maxVolume)
+    const type = cargoTypes[random(cargoTypes.length)]
+    const cargo = new Cargo(weight, volume, type)
+    cargos.push(cargo)
+  }
+  return cargos
+}
+
+console.log(generateCargos(10, 100, 10, cargoTypes, 100))

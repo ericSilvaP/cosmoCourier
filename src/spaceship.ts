@@ -56,16 +56,17 @@ export class Spaceship {
   }
 
   calculateFuelFor(planet: Planet): number {
-    if (!this.actualPlanet) throw Error('Nave sem planeta.')
+    if (!this.actualPlanet) throw Error('Spaceship without planet.')
     return (
       Math.abs(planet.distanceToKilometer() - this.actualPlanet!.distanceToKilometer()) / this.fuelConsumePerKilometer
     )
   }
 
   travelTo(planet: Planet): string {
-    if (!this.hasFuelFor(planet)) throw Error('Combustível insuficiente.')
-    if (!this.checkAtmosphereCompat(planet)) throw Error('Atmosfera incompatível.')
-    if (!this.checkCompositionCompat(planet)) throw Error('Composição incompatível.')
+    if (!this.hasFuelFor(planet)) throw Error('Insufficient fuel.')
+    if (!this.checkAtmosphereCompat(planet)) throw Error('Incompatible atmosphere.')
+    if (!this.checkCompositionCompat(planet)) throw Error('Incompatible composition.')
+
     const consumedFuel = this.calculateFuelFor(planet)
     this.totalFuel -= consumedFuel
     return `Foram consumidos ${consumedFuel} litros nessa viagem.`
