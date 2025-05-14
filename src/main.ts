@@ -1,21 +1,22 @@
-import { Cargo } from "./cargos";
-import { Planet } from "./planets";
-import { CargoType } from "./types/cargoType";
-import { AtmosphereType } from "./types/planetAtmosphere";
-import { PlanetComposition } from "./types/planetComposition";
+import { Cargo } from './cargos'
+import { Planet } from './planets'
+import { Spaceship } from './spaceship'
+import { CargoType } from './types/cargoType'
+import { AtmosphereType } from './types/planetAtmosphere'
+import { PlanetComposition } from './types/planetComposition'
+import { randoms } from './utils/'
 
-const compositions: string[] = [PlanetComposition.EXOTIC, PlanetComposition.GASEOUS, PlanetComposition.ICE_DWARF, PlanetComposition.ICE_GIANT, PlanetComposition.ROCKY, PlanetComposition.VOLCANIC]
-
-const atmospheres: string[] = [AtmosphereType.AMMONIA_RICH, AtmosphereType.CARBON_DIOXIDE_RICH, AtmosphereType.HYDROGEN_RICH, AtmosphereType.METHANE_RICH, AtmosphereType.NITROGEN_RICH, AtmosphereType.NONE, AtmosphereType.OXYGEN_RICH, AtmosphereType.SULFURIC]
-
-const cargoTypes: string[] = [CargoType.BIOLOGICAL, CargoType.COLONIZATION, CargoType.INDUSTRIAL, CargoType.MEDICAL, CargoType.SCIENTIFIC]
-
-function random(maxN: number): number {
-  return Math.floor(Math.random()*maxN)
-}
+const compositions = Object.values(PlanetComposition)
+const atmospheres = Object.values(AtmosphereType)
+const cargoTypes = Object.values(CargoType)
 
 const planets: Planet[] = []
+const spaceships: Spaceship[] = []
+const cargos: Cargo[] = []
 
-const nPlanets = random(10)
-const nCargos = random(10)
-const nSpaceships = random(10)
+const nPlanets = randoms(5)
+const nCargos = randoms(10)
+const nSpaceships = randoms(3)
+
+// gerar planetas
+for (let i = 0; i < nPlanets; i++) {}

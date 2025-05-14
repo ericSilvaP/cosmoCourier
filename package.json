@@ -45,7 +45,7 @@
         "lint-staged": "^15",
         "prettier": "^3",
         "ts-jest": "^29",
-        "ts-node": "^10",
+        "ts-node": "^10.9.2",
         "ts-node-dev": "^2",
         "tsc-alias": "^1",
         "tsconfig-paths": "^4",

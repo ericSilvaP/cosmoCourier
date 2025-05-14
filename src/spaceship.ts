@@ -1,5 +1,5 @@
-import { Cargo } from "./cargos";
-import { Planet } from "./planets";
+import { Cargo } from './cargos'
+import { Planet } from './planets'
 
 export class Spaceship {
   private actualPlanet: Planet | undefined
@@ -8,13 +8,14 @@ export class Spaceship {
   // adicionar atributo de temperatura
 
   constructor(
+    private name: string,
     private weightCapacity: number, // em quilos
     private volumeCapacity: number, // em litros
     private maxFuel: number,
     private fuelConsumePerKilometer: number, // em litros
     private avgSpeed: number, // em km/s
     public readonly compositionsCompatibility: string[],
-    public readonly atmosphereCompatibility: string[]
+    public readonly atmosphereCompatibility: string[],
   ) {
     this.totalFuel = this.maxFuel
   }
@@ -55,14 +56,16 @@ export class Spaceship {
   }
 
   calculateFuelFor(planet: Planet): number {
-    if (!this.actualPlanet) throw Error("Nave sem planeta.")
-    return Math.abs(planet.distanceToKilometer() - this.actualPlanet!.distanceToKilometer()) / this.fuelConsumePerKilometer
+    if (!this.actualPlanet) throw Error('Nave sem planeta.')
+    return (
+      Math.abs(planet.distanceToKilometer() - this.actualPlanet!.distanceToKilometer()) / this.fuelConsumePerKilometer
+    )
   }
 
   travelTo(planet: Planet): string {
-    if (!this.hasFuelFor(planet)) throw Error("Combustível insuficiente.")
-    if (!this.checkAtmosphereCompat(planet)) throw Error("Atmosfera incompatível.")
-    if (!this.checkCompositionCompat(planet)) throw Error("Composição incompatível.")
+    if (!this.hasFuelFor(planet)) throw Error('Combustível insuficiente.')
+    if (!this.checkAtmosphereCompat(planet)) throw Error('Atmosfera incompatível.')
+    if (!this.checkCompositionCompat(planet)) throw Error('Composição incompatível.')
     const consumedFuel = this.calculateFuelFor(planet)
     this.totalFuel -= consumedFuel
     return `Foram consumidos ${consumedFuel} litros nessa viagem.`
@@ -73,7 +76,7 @@ export class Spaceship {
   }
 
   checkCompositionCompat(planet: Planet): boolean {
-    return this.compositionsCompatibility.includes(planet.getComposition());
+    return this.compositionsCompatibility.includes(planet.getComposition())
   }
 
   checkAtmosphereCompat(planet: Planet): boolean {

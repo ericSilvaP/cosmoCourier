@@ -34,7 +34,7 @@
     "./src/**/*.ts",
     "./test/**/*.ts",
     "./types/**/*.d.ts"
-  ],
+, "src/utils/randoms"  ],
   "exclude": [
     "./build",
     "./node_modules",

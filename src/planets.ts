@@ -1,11 +1,12 @@
-import { Cargo } from "./cargos"
+import { Cargo } from './cargos'
 
 export class Planet {
-  constructor (
+  constructor(
+    private name: string,
     private distanceFromEarth: number, // em Unidade Astronômica (UA). Equivale a 149.597.870,7 km
     private atmosphereType: string,
     private composition: string,
-    public readonly cargosCompatibility: string[]
+    public readonly cargosCompatibility: string[],
   ) {}
 
   getDistanceFromEarth(): number {
