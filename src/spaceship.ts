@@ -10,9 +10,9 @@ export class Spaceship {
   constructor(
     private name: string,
     private weightCapacity: number, // em quilos
-    private volumeCapacity: number, // em litros
+    private volumeCapacity: number, // em m3
     private maxFuel: number,
-    private fuelConsumePerKilometer: number, // em litros
+    private fuelConsumePerKilometer: number, // em %
     private avgSpeed: number, // em km/s
     public readonly compositionsCompatibility: string[],
     public readonly atmosphereCompatibility: string[],
@@ -38,6 +38,14 @@ export class Spaceship {
 
   getAvgSpeed(): number {
     return this.avgSpeed
+  }
+
+  addCompositionsCompatibility(composition: string): void {
+    this.compositionsCompatibility.push(composition)
+  }
+
+  addAtmosphereCompatibility(atmosphere: string): void {
+    this.atmosphereCompatibility.push(atmosphere)
   }
 
   canTransport(cargo: Cargo): boolean {
