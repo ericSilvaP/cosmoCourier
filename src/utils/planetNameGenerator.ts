@@ -1,6 +1,6 @@
 import { random } from './random'
 
-export function planetNameGenerator(prefixes: string[], sufixes: string[], infixes?: string[]): string {
+export function nameGenerator(prefixes: string[], sufixes: string[], infixes?: string[]): string {
   let prefix: string = prefixes[random(prefixes.length)].toLowerCase()
   let sufix: string = sufixes[random(sufixes.length)].toLowerCase()
   prefix = prefix.charAt(0).toUpperCase() + prefix.slice(1)

@@ -21,6 +21,14 @@ export class Planet {
     return this.composition
   }
 
+  getName(): string {
+    return this.name
+  }
+
+  addCargoCompatibilty(compatibility: string): void {
+    this.cargosCompatibility.push(compatibility)
+  }
+
   distanceToKilometer(): number {
     return this.getDistanceFromEarth() * 149597870.7
   }
