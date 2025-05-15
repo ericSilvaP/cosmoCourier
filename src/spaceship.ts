@@ -1,11 +1,11 @@
 import { Cargo } from './cargos'
 import { Planet } from './planets'
+import { CargoType } from './types/cargoType'
+import { AtmosphereType } from './types/planetAtmosphere'
+import { PlanetComposition } from './types/planetComposition'
 
 export class Spaceship {
-  private actualPlanet: Planet | undefined
   private totalFuel: number // em litros
-
-  // adicionar atributo de temperatura
 
   constructor(
     private name: string,
@@ -16,8 +16,17 @@ export class Spaceship {
     private avgSpeed: number, // em km/s
     public readonly compositionsCompatibility: string[],
     public readonly atmosphereCompatibility: string[],
+    private actualPlanet?: Planet,
   ) {
     this.totalFuel = this.maxFuel
+    if (!actualPlanet)
+      this.actualPlanet = new Planet(
+        'Earth',
+        0,
+        AtmosphereType.OXYGEN_RICH,
+        PlanetComposition.ROCKY,
+        Object.values(CargoType),
+      )
   }
 
   getCargoWeightCapacity(): number {
@@ -40,6 +49,10 @@ export class Spaceship {
     return this.avgSpeed
   }
 
+  getName(): string {
+    return this.name
+  }
+
   addCompositionsCompatibility(composition: string): void {
     this.compositionsCompatibility.push(composition)
   }
@@ -53,10 +66,7 @@ export class Spaceship {
   }
 
   travelTimeFor(planet: Planet): number {
-    /* 
-    Retorna o tempo em segundos
-    */
-    return planet.distanceToKilometer() / this.avgSpeed
+    return planet.distanceToKilometer() / this.avgSpeed // tempo em segundos
   }
 
   hasFuelFor(planet: Planet): boolean {
