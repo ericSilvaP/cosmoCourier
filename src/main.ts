@@ -4,7 +4,7 @@ import { Spaceship } from './spaceship'
 import { CargoType } from './types/cargoType'
 import { AtmosphereType } from './types/planetAtmosphere'
 import { PlanetComposition } from './types/planetComposition'
-import { nameGenerator } from './utils/planetNameGenerator'
+import { nameGenerator } from './utils/nameGenerator'
 import { choice, choicesRandom, random, randomFloat } from './utils/random'
 
 const compositions = Object.values(PlanetComposition)
@@ -33,21 +33,21 @@ const spaceshipPrefixes: string[] = [
 ]
 
 const spaceshipSufixes: string[] = [
-  'cruiser',
-  'rider',
-  'drift',
-  'hawk',
-  'pulse',
-  'wing',
-  'strider',
-  'flare',
-  'runner',
-  'storm',
-  'blade',
-  'ray',
-  'phantom',
-  'drive',
-  'ship',
+  'Cruiser',
+  'Rider',
+  'Drift',
+  'Hawk',
+  'Pulse',
+  'Wing',
+  'Strider',
+  'Flare',
+  'Runner',
+  'Storm',
+  'Blade',
+  'Ray',
+  'Phantom',
+  'Drive',
+  'Ship',
 ]
 
 function generatePlanets(

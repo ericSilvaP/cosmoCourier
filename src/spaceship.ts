@@ -10,8 +10,8 @@ export class Spaceship {
   constructor(
     private name: string,
     private weightCapacity: number, // em quilos
-    private volumeCapacity: number, // em m3
-    private maxFuel: number,
+    private volumeCapacity: number, // em litros
+    private maxFuel: number, // em m³
     private fuelConsumePerKilometer: number, // em %
     private avgSpeed: number, // em km/s
     public readonly compositionsCompatibility: string[],
