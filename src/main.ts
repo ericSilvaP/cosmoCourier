@@ -5,7 +5,7 @@ import { CargoType } from './types/cargoType'
 import { AtmosphereType } from './types/planetAtmosphere'
 import { PlanetComposition } from './types/planetComposition'
 import { nameGenerator } from './utils/planetNameGenerator'
-import { random, randomFloat } from './utils/random'
+import { choice, choicesRandom, random, randomFloat } from './utils/random'
 
 const compositions = Object.values(PlanetComposition)
 const atmospheres = Object.values(AtmosphereType)
@@ -67,26 +67,18 @@ function generatePlanets(
     throw new Error('Empty array.')
   }
 
-  if (n < 0) throw Error('N must be positive.')
-  if (maxDistance < 0) throw Error('MaxDistance must be positive.')
+  if (n < 0) throw new Error('N must be positive.')
+  if (maxDistance < 0) throw new Error('MaxDistance must be positive.')
 
   const planets: Planet[] = []
   for (let i = 0; i < n; i++) {
     // atributos da classe Planet
     const name = nameGenerator(prefixes, sufixes, infixes)
     const distanceFromEarth = randomFloat(1, maxDistance)
-    const atmosphereType = atmospheres[random(atmospheres.length)]
-    const composition = compositions[random(compositions.length)]
-    const cargosCompatibility: string[] = []
+    const atmosphereType = choice(atmospheres)
+    const composition = choice(compositions)
+    const cargosCompatibility: string[] = choicesRandom(cargoTypes)
 
-    for (let j = 0; j < random(cargoTypes.length - 1) + 1; j++) {
-      const cargoCompatTemp = cargoTypes[random(cargoTypes.length)]
-      if (cargosCompatibility.includes(cargoCompatTemp)) {
-        j--
-        continue
-      }
-      cargosCompatibility.push(cargoCompatTemp)
-    }
     planets.push(new Planet(name, distanceFromEarth, atmosphereType, composition, cargosCompatibility))
   }
   return planets
@@ -100,7 +92,7 @@ function generateCargos(
   minWeight?: number,
   minVolume?: number,
 ): Cargo[] {
-  if (cargoTypes.length == 0) throw Error('Empty array.')
+  if (cargoTypes.length === 0) throw new Error('Empty array.')
   if (
     n <= 0 ||
     maxWeight <= 0 ||
@@ -120,7 +112,7 @@ function generateCargos(
   for (let i = 0; i < n; i++) {
     const weight = randomFloat(minWeight, maxWeight)
     const volume = randomFloat(minVolume, maxVolume)
-    const type = cargoTypes[random(cargoTypes.length)]
+    const type = choice(cargoTypes)
     cargos.push(new Cargo(weight, volume, type))
   }
   return cargos
@@ -144,6 +136,7 @@ function generateSpaceships(
   minFuelConsumePerKilometer?: number,
   minAvgSpeed?: number,
 ) {
+  // Validação de valores numéricos positivos
   if (
     n <= 0 ||
     maxWeightCapacity <= 0 ||
@@ -160,10 +153,12 @@ function generateSpaceships(
     throw new Error('All numeric values must be positive.')
   }
 
+  // Validação de arrays
   if (compositions.length === 0 || atmospheres.length === 0 || prefixes.length === 0 || sufixes.length === 0) {
     throw new Error('Arrays must not be empty.')
   }
 
+  // Validação de min < max
   if (
     (minWeightCapacity !== undefined && minWeightCapacity > maxWeightCapacity) ||
     (minVolumeCapacity !== undefined && minVolumeCapacity > maxVolumeCapacity) ||
@@ -174,6 +169,7 @@ function generateSpaceships(
     throw new Error('Minimum values must be less than or equal to maximum values.')
   }
 
+  // Definição de valores opcionais caso não sejam informados
   if (!minAvgSpeed) minAvgSpeed = 1
   if (!minFuelConsumePerKilometer) minFuelConsumePerKilometer = 1
   if (!minMaxFuel) minMaxFuel = 1
@@ -189,26 +185,9 @@ function generateSpaceships(
     const maxFuel = randomFloat(minMaxFuel, maxMaxFuel)
     const fuelConsumePerKilometer = randomFloat(minFuelConsumePerKilometer, maxFuelConsumePerKilometer)
     const avgSpeed = randomFloat(minAvgSpeed, maxAvgSpeed)
-    const compositionsCompatibility: string[] = []
-    const atmospheresCompatibility: string[] = []
+    const compositionsCompatibility: string[] = choicesRandom(compositions)
+    const atmospheresCompatibility: string[] = choicesRandom(atmospheres)
 
-    for (let j = 0; j < random(compositions.length - 1) + 1; j++) {
-      const composition = compositions[random(compositions.length)]
-      if (compositionsCompatibility.includes(composition)) {
-        j--
-        continue
-      }
-      compositionsCompatibility.push(composition)
-    }
-
-    for (let j = 0; j < random(atmospheres.length - 1) + 1; j++) {
-      const atmosphere = atmospheres[random(atmospheres.length)]
-      if (atmospheresCompatibility.includes(atmosphere)) {
-        j--
-        continue
-      }
-      atmospheresCompatibility.push(atmosphere)
-    }
     spaceships.push(
       new Spaceship(
         name,
