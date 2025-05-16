@@ -19,7 +19,7 @@ const spaceshipSufixes = ['Cruiser', 'Rider', 'Drift', 'Hawk', 'Pulse', 'Strider
 
 // Geração aleatória
 const planets: Planet[] = generatePlanets(
-  10,
+  8,
   3,
   Object.values(AtmosphereType),
   Object.values(PlanetComposition),
@@ -34,9 +34,9 @@ const spaceships: Spaceship[] = generateSpaceships(
   3,
   1000,
   1000,
-  20000,
+  200000,
   0.01,
-  3000,
+  100000,
   Object.values(PlanetComposition),
   Object.values(AtmosphereType),
   spaceshipPrefixes,
@@ -44,9 +44,9 @@ const spaceships: Spaceship[] = generateSpaceships(
   [' '],
   500,
   500,
-  15000,
+  30000,
   0.01,
-  2000,
+  80000,
 )
 
 const missionControl: MissionControl = new MissionControl(cargos, planets, spaceships)
