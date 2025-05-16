@@ -1,74 +1,53 @@
-import { generateSpaceships } from '@/core/generators'
+import { generateCargos, generatePlanets, generateSpaceships } from '@/core/generators'
 
 import { Cargo } from './cargos'
+import { MissionControl } from './core/missionControl'
 import { Planet } from './planets'
 import { Spaceship } from './spaceship'
 import { CargoType } from './types/cargoType'
 import { AtmosphereType } from './types/planetAtmosphere'
 import { PlanetComposition } from './types/planetComposition'
-import { nameGenerator } from './utils/nameGenerator'
-import { choice, choicesRandom, randomFloat } from './utils/random'
-
-const compositions = Object.values(PlanetComposition)
-const atmospheres = Object.values(AtmosphereType)
-const cargoTypes = Object.values(CargoType)
+import { choice, choicesRandom } from './utils/random'
+import { simOuNao } from './utils/simOuNao'
+import { formatNumber } from './utils/textFormat'
 
 const planetPrefixes = ['Gas', 'Tro', 'Finlo', 'Iperf', 'Adol', 'Sers']
-const planetSufixes = ['Atan', 'imer', 'tein', 'otga', 'ekir', 'svec']
+const planetSufixes = ['atan', 'imer', 'tein', 'otga', 'ekir', 'svec']
 
-const spaceshipPrefixes: string[] = [
-  'Star',
-  'Nova',
-  'Galax',
-  'Astro',
-  'Velo',
-  'Nebul',
-  'Quant',
-  'Orion',
-  'Zeno',
-  'Cryo',
-  'Solar',
-  'Xeno',
-  'Lumi',
-  'Hyper',
-  'Void',
-]
+const spaceshipPrefixes = ['Star', 'Nova', 'Galax', 'Astro', 'Velo', 'Nebul']
+const spaceshipSufixes = ['Cruiser', 'Rider', 'Drift', 'Hawk', 'Pulse', 'Strider']
 
-const spaceshipSufixes: string[] = [
-  'Cruiser',
-  'Rider',
-  'Drift',
-  'Hawk',
-  'Pulse',
-  'Wing',
-  'Strider',
-  'Flare',
-  'Runner',
-  'Storm',
-  'Blade',
-  'Ray',
-  'Phantom',
-  'Drive',
-  'Ship',
-]
-
-console.log(
-  generateSpaceships(
-    10,
-    1000,
-    1000,
-    10000,
-    10,
-    2000,
-    compositions,
-    atmospheres,
-    spaceshipPrefixes,
-    spaceshipSufixes,
-    [' '],
-    500,
-    500,
-    300,
-    5,
-    1000,
-  ),
+// Geração aleatória
+const planets: Planet[] = generatePlanets(
+  10,
+  3,
+  Object.values(AtmosphereType),
+  Object.values(PlanetComposition),
+  Object.values(CargoType),
+  planetPrefixes,
+  planetSufixes,
 )
+
+const cargos: Cargo[] = generateCargos(10, 1000, 1000, Object.values(CargoType))
+
+const spaceships: Spaceship[] = generateSpaceships(
+  3,
+  1000,
+  1000,
+  20000,
+  0.01,
+  3000,
+  Object.values(PlanetComposition),
+  Object.values(AtmosphereType),
+  spaceshipPrefixes,
+  spaceshipSufixes,
+  [' '],
+  500,
+  500,
+  15000,
+  0.01,
+  2000,
+)
+
+const missionControl: MissionControl = new MissionControl(cargos, planets, spaceships)
+missionControl.startMission()

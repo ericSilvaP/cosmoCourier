@@ -3,7 +3,10 @@ export class Cargo {
     private weight: number, // em kilos
     private volume: number, // em litros
     private type: string,
-  ) {}
+  ) {
+    if (weight < 0) throw new Error('Weight cannot be negative.')
+    if (volume < 0) throw new Error('Volume cannot be negative.')
+  }
 
   getWeight(): number {
     return this.weight

@@ -25,12 +25,12 @@ export class Planet {
     return this.name
   }
 
-  addCargoCompatibilty(compatibility: string): void {
-    this.cargosCompatibility.push(compatibility)
+  getCargosCompatibility(): string[] {
+    return this.cargosCompatibility
   }
 
   distanceToKilometer(): number {
-    return this.getDistanceFromEarth() * 149597870.7
+    return this.distanceFromEarth * 149597870.7
   }
 
   checkCargoCompat(cargo: Cargo): boolean {

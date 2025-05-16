@@ -89,7 +89,7 @@ export function generateSpaceships(
   minMaxFuel?: number,
   minFuelConsumePerKilometer?: number,
   minAvgSpeed?: number,
-) {
+): Spaceship[] {
   // Validação de valores numéricos positivos
   if (
     n <= 0 ||
