@@ -1,8 +1,8 @@
-import { Cargo } from '@/cargos'
-import { Planet } from '@/planets'
-import { Spaceship } from '@/spaceship'
-import { choice } from '@/utils/random'
-import { formatNumber } from '@/utils/textFormat'
+import { Cargo } from '@/core/models/Cargos'
+import { Planet } from '@/core/models/Planets'
+import { Spaceship } from '@/core/models/Spaceship'
+import { choice } from '@/core/utils/random'
+import { formatNumber } from '@/core/utils/textFormat'
 
 export class MissionControl {
   constructor(

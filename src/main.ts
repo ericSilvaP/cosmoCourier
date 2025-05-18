@@ -1,15 +1,12 @@
-import { generateCargos, generatePlanets, generateSpaceships } from '@/core/generators'
+import { generateCargos, generatePlanets, generateSpaceships } from '@/core/utils/generators'
 
-import { Cargo } from './cargos'
-import { MissionControl } from './core/missionControl'
-import { Planet } from './planets'
-import { Spaceship } from './spaceship'
+import { Cargo } from './core/models/Cargos'
+import { MissionControl } from './core/models/MissionControl'
+import { Planet } from './core/models/Planets'
+import { Spaceship } from './core/models/Spaceship'
 import { CargoType } from './types/cargoType'
 import { AtmosphereType } from './types/planetAtmosphere'
 import { PlanetComposition } from './types/planetComposition'
-import { choice, choicesRandom } from './utils/random'
-import { simOuNao } from './utils/simOuNao'
-import { formatNumber } from './utils/textFormat'
 
 const planetPrefixes = ['Gas', 'Tro', 'Finlo', 'Iperf', 'Adol', 'Sers']
 const planetSufixes = ['atan', 'imer', 'tein', 'otga', 'ekir', 'svec']

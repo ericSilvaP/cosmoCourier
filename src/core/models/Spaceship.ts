@@ -1,5 +1,5 @@
-import { Cargo } from './cargos'
-import { Planet } from './planets'
+import { Cargo } from './Cargos'
+import { Planet } from './Planets'
 
 export class Spaceship {
   private totalFuel: number // em litros

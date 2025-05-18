@@ -1,4 +1,4 @@
-import { Cargo } from './cargos'
+import { Cargo } from './Cargos'
 
 export class Planet {
   constructor(
