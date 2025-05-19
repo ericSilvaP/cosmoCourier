@@ -25,10 +25,6 @@ export class Planet {
     return this.name
   }
 
-  getCargosCompatibility(): string[] {
-    return this.cargosCompatibility
-  }
-
   distanceToKilometer(): number {
     return this.distanceFromEarth * 149597870.7
   }

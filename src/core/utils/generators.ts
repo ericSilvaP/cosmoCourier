@@ -1,8 +1,9 @@
 import { Cargo } from '@/core/models/Cargos'
 import { Planet } from '@/core/models/Planets'
 import { Spaceship } from '@/core/models/Spaceship'
-import { nameGenerator } from '@/core/utils/nameGenerator'
-import { randomFloat, choice, choicesRandom } from '@/core/utils/random'
+
+import { nameGenerator } from './nameGenerator'
+import { randomFloat, choice, choicesRandom } from './random'
 
 export function generatePlanets(
   n: number,

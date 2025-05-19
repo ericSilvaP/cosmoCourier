@@ -2,8 +2,6 @@ import { Cargo } from './Cargos'
 import { Planet } from './Planets'
 
 export class Spaceship {
-  private totalFuel: number // em litros
-
   constructor(
     private name: string,
     private weightCapacity: number, // em quilos
@@ -13,9 +11,7 @@ export class Spaceship {
     private avgSpeed: number, // em km/s
     public readonly compositionsCompatibility: string[],
     public readonly atmosphereCompatibility: string[],
-  ) {
-    this.totalFuel = this.maxFuel
-  }
+  ) {}
 
   getCargoWeightCapacity(): number {
     return this.weightCapacity
@@ -23,10 +19,6 @@ export class Spaceship {
 
   getCargoVolumeCapacity(): number {
     return this.volumeCapacity
-  }
-
-  getTotalFuel(): number {
-    return this.totalFuel
   }
 
   getFuelConsumePerKilometer(): number {
@@ -50,11 +42,11 @@ export class Spaceship {
   }
 
   hasFuelFor(planet: Planet): boolean {
-    return this.totalFuel >= planet.distanceToKilometer() * (this.fuelConsumePerKilometer / 100)
+    return this.maxFuel >= planet.distanceToKilometer() * (this.fuelConsumePerKilometer / 100)
   }
 
   hasFuelForDistance(distance: number): boolean {
-    return this.totalFuel >= distance * (this.fuelConsumePerKilometer / 100)
+    return this.maxFuel >= distance * (this.fuelConsumePerKilometer / 100)
   }
 
   calculateFuelFor(planet: Planet): number {
@@ -62,12 +54,8 @@ export class Spaceship {
   }
 
   consumedFuelFor(planet: Planet): number {
-    // if (!this.hasFuelFor(planet)) throw Error('Insufficient fuel.')
-    // if (!this.checkAtmosphereCompat(planet)) throw Error('Incompatible atmosphere.')
-    // if (!this.checkCompositionCompat(planet)) throw Error('Incompatible composition.')
-
     const consumedFuel = this.calculateFuelFor(planet)
-    this.totalFuel -= consumedFuel
+    this.maxFuel -= consumedFuel
     return consumedFuel
   }
 
