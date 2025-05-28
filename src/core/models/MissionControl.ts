@@ -18,7 +18,10 @@ export class MissionControl {
       for (let i = 0; i < 2; i++) {
         const planet = choice(this.planetList)
         const cargo = choice(this.cargoList)
-        const travelTime = (ship.travelTimeFor(planet) / 60 / 60 / 24) * 2
+        const totalSeconds = ship.travelTimeFor(planet) * 2
+        const hours = Math.floor(totalSeconds / 3600)
+        const minutes = Math.floor((totalSeconds % 3600) / 60)
+        const seconds = (totalSeconds % 60).toFixed(0)
         const consumedFuel = formatNumber((ship.consumedFuelFor(planet) * 2).toFixed(2))
 
         const isCompatibleWithPlanet = ship.checkPlanetCompat(planet)
@@ -51,7 +54,7 @@ export class MissionControl {
         } else {
           console.log(`Entrega bem sucedida`)
           console.log(`\nPrecisa reabastecer p/ voltar - ${needsRefuelToReturn ? 'sim' : 'não'}`)
-          console.log(`Tempo de viagem - ${travelTime.toFixed(0)} dia(s)`)
+          console.log(`Tempo de viagem - ${hours} horas ${minutes} minutos e ${seconds} segundos`)
           console.log(`Combustível consumido - ${consumedFuel} L\n\n`)
           succeedMission++
         }
